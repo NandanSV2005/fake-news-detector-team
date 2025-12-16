@@ -1,0 +1,117 @@
+{
+  "test_date": "2026-01-03T12:06:11.929468",
+  "provider": "gemini",
+  "total_tests": 0,
+  "correct": 0,
+  "accuracy": 0,
+  "results": [
+    {
+      "test_num": 1,
+      "category": "Tech News",
+      "expected": "TRUE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 2,
+      "category": "Sensational Fake",
+      "expected": "FAKE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 3,
+      "category": "Government/Military",
+      "expected": "TRUE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 4,
+      "category": "Health Misinformation",
+      "expected": "FAKE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 5,
+      "category": "AI Development",
+      "expected": "TRUE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 6,
+      "category": "Dangerous Misinformation",
+      "expected": "FAKE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 7,
+      "category": "Climate Science",
+      "expected": "TRUE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 8,
+      "category": "Conspiracy Theory",
+      "expected": "FAKE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 9,
+      "category": "Business News",
+      "expected": "TRUE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 10,
+      "category": "Historical Conspiracy",
+      "expected": "FAKE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 11,
+      "category": "Technology",
+      "expected": "TRUE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    },
+    {
+      "test_num": 12,
+      "category": "Tech Misinformation",
+      "expected": "FAKE",
+      "predicted": "ERROR",
+      "confidence": 0,
+      "correct": false,
+      "error": "gemini API call failed"
+    }
+  ]
+}

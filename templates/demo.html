@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Fake News Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fake-card {
+            background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+        }
+        .true-card {
+            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-3 hover:text-gray-200 px-4 py-2 rounded bg-white/10">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Home</span>
+                </a>
+                <h1 class="text-2xl font-bold">Live Demo Examples</h1>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Fake News Detection Demo</h2>
+            <p class="text-gray-600">See real AI analysis of different news types</p>
+        </div>
+
+        {% if results %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {% for result in results %}
+            <div class="rounded-xl shadow-lg p-6 {% if result.is_fake %}fake-card{% else %}true-card{% endif %}">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">
+                        Example {{ loop.index }}
+                    </h3>
+                    <span class="px-4 py-2 rounded-full font-bold {% if result.is_fake %}bg-red-100 text-red-800{% else %}bg-green-100 text-green-800{% endif %}">
+                        {{ result.label }}
+                    </span>
+                </div>
+                
+                <div class="mb-6">
+                    <p class="text-gray-700 italic mb-2">"{{ result.text[:150] }}..."</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Confidence Level</p>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="h-3 rounded-full {% if result.is_fake %}bg-red-500{% else %}bg-green-500{% endif %}" 
+                                 style="width: {{ (result.confidence * 100)|round }}%"></div>
+                        </div>
+                        <p class="text-right text-sm font-bold mt-1">{{ (result.confidence * 100)|round }}%</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-3 {% if result.is_fake %}bg-red-50{% else %}bg-green-50{% endif %} rounded-lg border {% if result.is_fake %}border-red-200{% else %}border-green-200{% endif %}">
+                            <p class="text-xs text-gray-600 mb-1">True Probability</p>
+                            <p class="text-xl font-bold {% if result.is_fake %}text-red-600{% else %}text-green-600{% endif %}">
+                                {{ (result.true_probability * 100)|round }}%
+                            </p>
+                        </div>
+                        <div class="text-center p-3 {% if result.is_fake %}bg-red-50{% else %}bg-green-50{% endif %} rounded-lg border {% if result.is_fake %}border-red-200{% else %}border-green-200{% endif %}">
+                            <p class="text-xs text-gray-600 mb-1">Fake Probability</p>
+                            <p class="text-xl font-bold {% if result.is_fake %}text-red-600{% else %}text-green-600{% endif %}">
+                                {{ (result.fake_probability * 100)|round }}%
+                            </p>
+                        </div>
+                    </div>
+                    
+                    {% if result.key_indicators %}
+                    <div class="pt-4 border-t border-gray-300">
+                        <h5 class="font-bold text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-exclamation-circle mr-2"></i> Key Indicators
+                        </h5>
+                        <div class="space-y-1">
+                            {% for indicator in result.key_indicators %}
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-circle text-xs mr-2 {% if result.is_fake %}text-red-400{% else %}text-green-400{% endif %}"></i>
+                                <span>{{ indicator }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+            <div class="inline-block p-6 bg-gray-100 rounded-full mb-6">
+                <i class="fas fa-exclamation-triangle text-4xl text-gray-400"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-700 mb-2">No Demo Data Available</h4>
+            <p class="text-gray-500">Please start the Flask application to see demo results.</p>
+            <a href="/" class="inline-block mt-4 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+                <i class="fas fa-home mr-2"></i> Go to Home
+            </a>
+        </div>
+        {% endif %}
+
+        <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">How Our AI Detects Fake News</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center p-6">
+                    <div class="inline-block p-4 bg-blue-100 rounded-full mb-4">
+                        <i class="fas fa-language text-blue-600 text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Linguistic Analysis</h4>
+                    <p class="text-gray-600">Analyzes word choice, sentence structure, and writing patterns characteristic of fake news.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="inline-block p-4 bg-green-100 rounded-full mb-4">
+                        <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Pattern Recognition</h4>
+                    <p class="text-gray-600">Identifies common patterns in sensational headlines and exaggerated claims.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="inline-block p-4 bg-purple-100 rounded-full mb-4">
+                        <i class="fas fa-cogs text-purple-600 text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Multi-Model Ensemble</h4>
+                    <p class="text-gray-600">Combines predictions from XGBoost, Random Forest, and Logistic Regression for accuracy.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="/" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition mr-4">
+                <i class="fas fa-home mr-2"></i> Back to Home
+            </a>
+            <button onclick="window.location.reload()" class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition">
+                <i class="fas fa-sync mr-2"></i> Refresh Demo
+            </button>
+        </div>
+    </div>
+</body>
+</html>

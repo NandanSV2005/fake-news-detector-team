@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+.env
+
+# IntelliJ/IDE
+.idea/
+.vscode/
+
+# Project specific
+models/
+!models/.gitkeep
+# We might want to keep models if they are small, but usually we don't commit large pickle files. 
+# However, for this specific user project which seems to be a self-contained demo, 
+# and they just generated them, maybe they want them?
+# Standard practice is NO. But I'll exclude them to be safe and avoid large file errors.
+# I will add a note about this.
+
+# Artifacts
+.gemini/
